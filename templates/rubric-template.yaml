@@ -1,0 +1,107 @@
+# Academic Code Review
+# Rubric configuration template
+
+schema_version: "1.0"
+
+assignment:
+  id: "ASSIGNMENT-001"
+  name: "Nombre de la actividad"
+  description: ""
+  course: ""
+  academic_level: ""
+  language: ""
+  framework: ""
+  due_date: null
+
+grading:
+  # All criterion weights must sum to 100.
+  total_weight: 100
+
+  # Custom grading scale.
+  scale:
+    name: "Institutional Scale"
+    minimum: 1.0
+    maximum: 7.0
+    passing_grade: 4.0
+    decimal_places: 1
+    rounding: "half_up"
+
+    # Piecewise linear conversion from percentage
+    # to institutional grade.
+    conversion:
+      - percentage: 0
+        grade: 1.0
+      - percentage: 60
+        grade: 4.0
+      - percentage: 100
+        grade: 7.0
+
+  # Independent passing threshold.
+  passing:
+    minimum_percentage: 60
+
+  # Accepted values: proportional, none
+  missing_evidence_policy: "proportional"
+
+  # Accepted values: score, grade
+  rounding_stage: "score"
+
+  report_formats:
+    - markdown
+    - yaml
+    - json
+    - html
+
+criteria:
+  - id: "C01"
+    name: "Criterion name"
+    description: "Criterion description"
+    weight: 25
+    max_score: 10
+
+    indicators:
+      - id: "I01"
+        description: "First verifiable indicator"
+        weight: 50
+
+      - id: "I02"
+        description: "Second verifiable indicator"
+        weight: 50
+
+    evaluation_guidance:
+      full_compliance: "All indicators are satisfied."
+      partial_compliance: "Some indicators are satisfied."
+      non_compliance: "No indicators are satisfied."
+
+    evidence_required: true
+
+  - id: "C02"
+    name: "Second criterion"
+    description: "Second criterion description"
+    weight: 75
+    max_score: 10
+
+    indicators:
+      - id: "I03"
+        description: "Third verifiable indicator"
+        weight: 100
+
+    evidence_required: true
+
+student:
+  id: null
+  name: null
+  email: null
+
+submission:
+  type: "zip"
+  location: ""
+  submitted_at: null
+  commit: null
+
+evaluation:
+  status: "pending"
+  evaluator_version: "1.0"
+  include_line_references: true
+  include_recommendations: true
+  teacher_validation_required: true
