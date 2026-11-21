@@ -28,10 +28,11 @@ fixtures:
     execution_expectations: { static_only_conclusion: "Intentional defects are identifiable from source; compile and runtime outcomes remain unverified.", isolated_run_expected: true }
   - fixture_id: javascript-typescript
     expected_technologies: [TypeScript, Node.js, Node test runner]
-    defects: [stale request can overwrite latest result, rejection leaves loading active]
+    defects: [stale request can overwrite latest result, rejection is unhandled and does not set error state, loading state does not track active request lifecycle]
+    coverage_gaps: [no test for successful search]
     non_findings: [native fetch, framework-free DOM]
-    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
-    execution_expectations: { static_only_conclusion: "Async race and missing rejection cleanup are inspectable; browser behavior remains unverified.", isolated_run_expected: true }
+    expected_score: { percentage: 74, grade: 5.1, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "The stale-response race, unhandled rejection, and loading-state lifecycle defects are inspectable; test results remain unverified.", isolated_run_expected: true }
   - fixture_id: kotlin-android
     expected_technologies: [Kotlin, Android]
     defects: [blank note accepted, draft not retained after recreation]
