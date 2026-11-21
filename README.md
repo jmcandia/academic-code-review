@@ -66,6 +66,16 @@ Use academic-code-review to evaluate every submission in the attached submission
 
 Keep each student's evidence and reports separate. If no approved isolated environment is available, the skill performs static inspection and reports execution as unverified. The full workflow, including batch handling, is in `references/evaluation-workflow.md`.
 
+### Review and approve an evaluation
+
+Every evaluation starts as `pending_teacher_review`. Review the evidence, criterion scores, grade calculation and limitations before deciding. If you approve it without changes, ask the agent to update both output files:
+
+```text
+I reviewed this evaluation and approve it without score changes. Update evaluation-result.yaml and evaluation-report.md to record status `approved`, my name as reviewer, today's date, and this decision. Keep the proposed scores and evidence unchanged, and make sure both files show the same review status.
+```
+
+If you change any score, ask the agent to preserve the original assessment, record the criterion, original and revised scores, reason, reviewer and date, and recalculate dependent totals and grade conversion. Keep the Markdown and YAML results synchronized. See `templates/evaluation-result.yaml` and `templates/evaluation-report.md` for the review fields.
+
 ## Rubric
 
 A rubric defines weighted criteria, and each criterion contains weighted indicators. Validation rules:
