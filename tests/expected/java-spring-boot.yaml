@@ -1,0 +1,22 @@
+schema_version: "1.0"
+fixture_id: java-spring-boot
+expected_technologies: [Java 21, Spring Boot, Maven, Spring MVC]
+defects:
+  - {id: F-SB-01, severity: high, criterion_id: C02, indicator_id: I03, location: {path: "src/main/java/edu/fixture/tasks/TaskController.java", line: 14}, symptom: "A blank title is accepted and a task is created.", rationale: "The request DTO has no validation constraint and the controller does not validate it."}
+  - {id: F-SB-02, severity: medium, criterion_id: C03, indicator_id: I05, location: {path: "src/main/java/edu/fixture/tasks/TaskController.java", line: 19}, symptom: "An unknown task is returned as HTTP 200 with a null body rather than 404.", rationale: "The controller uses ok(orElse(null)) instead of mapping an empty Optional to not found."}
+non_findings:
+  - {id: NF-SB-01, rationale: "An in-memory service is sufficient for the assignment; a database was not required."}
+  - {id: NF-SB-02, rationale: "Constructor injection and Java records are valid choices."}
+  - {id: NF-SB-03, rationale: "The service owns task storage and the controller delegates to it."}
+expected_score:
+  percentage: 80
+  grade: 5.5
+  passed: true
+  teacher_review_status: pending_teacher_review
+  indicator_scoring_rule: "Each criterion averages its two 50%-weighted indicators. All indicators receive 10/10 except I03 and I05, which receive 0/10."
+  indicator_scores: [{id: I01, score: 10}, {id: I02, score: 10}, {id: I03, score: 0}, {id: I04, score: 10}, {id: I05, score: 0}, {id: I06, score: 10}, {id: I07, score: 10}, {id: I08, score: 10}, {id: I09, score: 10}, {id: I10, score: 10}]
+  criteria: [{id: C01, score: 10, max_score: 10, contribution: 20}, {id: C02, score: 5, max_score: 10, contribution: 10}, {id: C03, score: 5, max_score: 10, contribution: 10}, {id: C04, score: 10, max_score: 10, contribution: 20}, {id: C05, score: 10, max_score: 10, contribution: 20}]
+execution_expectations:
+  static_only_conclusion: "Request DTO validation and not-found mapping defects are inspectable; HTTP execution remains unverified."
+  isolated_run_expected: true
+  expected_checks: ["Maven test suite compiles", "valid task creation test passes", "blank title and unknown task tests fail with incorrect HTTP statuses"]

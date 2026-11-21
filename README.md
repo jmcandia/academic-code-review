@@ -84,7 +84,7 @@ templates/               Rubric template
 
 ## Status
 
-`SKILL.md` references `templates/evaluation-report.md` and `templates/evaluation-result.yaml`. These templates are not included yet.
+`templates/evaluation-report.md` and `templates/evaluation-result.yaml` provide matching human-readable and machine-readable evaluation records.
 
 ## Author
 

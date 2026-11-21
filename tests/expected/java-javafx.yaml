@@ -1,0 +1,101 @@
+schema_version: "1.0"
+fixture_id: java-javafx
+expected_technologies: [Java 21, JavaFX, FXML, Maven, Gson]
+
+defects:
+  - id: F-JFX-01
+    severity: high
+    criterion_id: IE-2.2.1
+    indicator_id: I-2.2.1
+    location: { path: "src/main/resources/edu/fixture/patitas/view/main-view.fxml", line: 4 }
+    symptom: "Only one FXML view exists; the registration form is embedded in the main view."
+    rationale: "The assignment requires a main list/search view and a separate registration view."
+  - id: F-JFX-03
+    severity: low
+    criterion_id: IE-2.3.2
+    indicator_id: I-2.3.2
+    location: { path: "src/main/java/edu/fixture/patitas/controller/MainController.java", line: 63 }
+    symptom: "Successful deletion does not produce a confirmation message."
+    rationale: "The rubric explicitly expects visual feedback for deletion."
+  - id: F-JFX-04
+    severity: medium
+    criterion_id: IE-2.4.2
+    indicator_id: I-2.4.2
+    location: { path: "src/main/java/edu/fixture/patitas/controller/MainController.java", line: 45 }
+    symptom: "Required-field and input parsing validation live in the controller."
+    rationale: "Several form checks are placed in the controller, matching partial rather than full delegation; persistence is delegated."
+  - id: F-JFX-05
+    severity: critical
+    criterion_id: IE-2.6.1
+    indicator_id: I-2.6.1
+    location: { path: "src/main/resources/edu/fixture/patitas/view/main-view.fxml", line: 4 }
+    symptom: "No secondary registration view or navigation exists."
+    rationale: "The required view-to-view flow and controller data transfer are absent."
+  - id: F-JFX-06
+    severity: medium
+    criterion_id: IE-2.6.2
+    indicator_id: I-2.6.2
+    location: { path: "src/main/java/edu/fixture/patitas/controller/MainController.java", line: 46 }
+    symptom: "Parsed ages are not checked against the valid business range."
+    rationale: "The handler accepts negative values and ages above the model's intended range."
+  - id: F-JFX-07
+    severity: medium
+    criterion_id: IE-2.6.2
+    indicator_id: I-2.6.2
+    location: { path: "src/main/java/edu/fixture/patitas/controller/MainController.java", line: 48 }
+    symptom: "The weight comparison accepts positive infinity; NaN is not rejected as non-finite."
+    rationale: "A positive-number check alone does not ensure a finite, valid measurement."
+  - id: F-JFX-08
+    severity: high
+    criterion_id: IE-2.7.2
+    indicator_id: I-2.7.2
+    location: { path: "src/main/java/edu/fixture/patitas/repository/PetRepository.java", line: 25 }
+    symptom: "Deletion mutates the in-memory list but does not persist it through the DAO."
+    rationale: "After restart, a deleted pet reappears; the test suite contains a regression check for this."
+  - id: F-JFX-09
+    severity: high
+    criterion_id: IE-2.8.1
+    indicator_id: I-2.8.1
+    location: { path: "src/main/java/edu/fixture/patitas/repository/PetRepository.java", line: 25 }
+    symptom: "The integrated user flow cannot persist deletions and lacks the required second screen."
+    rationale: "End-to-end integration has distinct consequences under the rubric's explicit workflow indicator."
+
+non_findings:
+  - id: NF-JFX-01
+    rationale: "A single application module and direct JavaFX controls are allowed by the assignment."
+  - id: NF-JFX-02
+    rationale: "The code is organized into model, view resources, controller, DAO, and repository packages."
+  - id: NF-JFX-03
+    rationale: "Persisting a pet category is not specified by the assignment; do not invent a deduction for the simple Pet model."
+
+expected_score:
+  percentage: 73.3
+  grade: 5.0
+  passed: true
+  teacher_review_status: pending_teacher_review
+  rounding: "Calculate the weighted percentage exactly; convert using the rubric's piecewise formula; round the grade half-up to one decimal."
+  indicator_scoring_rule: "Each criterion has one indicator weighted at 100%; the awarded indicator score is the selected discrete level percentage of its 100-point maximum."
+  indicator_scores: [{id: I-2.1.1, score: 100}, {id: I-2.2.1, score: 30}, {id: I-2.3.1, score: 100}, {id: I-2.3.2, score: 80}, {id: I-2.4.1, score: 100}, {id: I-2.4.2, score: 60}, {id: I-2.5.1, score: 100}, {id: I-2.5.2, score: 100}, {id: I-2.6.1, score: 0}, {id: I-2.6.2, score: 60}, {id: I-2.7.1, score: 100}, {id: I-2.7.2, score: 80}, {id: I-2.8.1, score: 30}]
+  criteria:
+    - { id: IE-2.1.1, level: excellent, percentage: 100, weight: 8, contribution: 8.0 }
+    - { id: IE-2.2.1, level: emerging, percentage: 30, weight: 10, contribution: 3.0 }
+    - { id: IE-2.3.1, level: excellent, percentage: 100, weight: 6, contribution: 6.0 }
+    - { id: IE-2.3.2, level: good, percentage: 80, weight: 6, contribution: 4.8 }
+    - { id: IE-2.4.1, level: excellent, percentage: 100, weight: 8, contribution: 8.0 }
+    - { id: IE-2.4.2, level: acceptable, percentage: 60, weight: 7, contribution: 4.2 }
+    - { id: IE-2.5.1, level: excellent, percentage: 100, weight: 10, contribution: 10.0 }
+    - { id: IE-2.5.2, level: excellent, percentage: 100, weight: 10, contribution: 10.0 }
+    - { id: IE-2.6.1, level: not_achieved, percentage: 0, weight: 8, contribution: 0.0 }
+    - { id: IE-2.6.2, level: acceptable, percentage: 60, weight: 7, contribution: 4.2 }
+    - { id: IE-2.7.1, level: excellent, percentage: 100, weight: 8, contribution: 8.0 }
+    - { id: IE-2.7.2, level: good, percentage: 80, weight: 7, contribution: 5.6 }
+    - { id: IE-2.8.1, level: emerging, percentage: 30, weight: 5, contribution: 1.5 }
+
+execution_expectations:
+  static_only_conclusion: "The intentional defects are identifiable from source; compile and runtime outcomes remain unverified."
+  isolated_run_expected: true
+  expected_checks:
+    - "Maven compilation succeeds in a provisioned Java 21/JavaFX environment."
+    - "The add persistence repository test passes."
+    - "The delete persistence repository test fails because delete does not call DAO.writeAll."
+    - "Launching the UI is inconclusive if an isolated JavaFX display is unavailable."

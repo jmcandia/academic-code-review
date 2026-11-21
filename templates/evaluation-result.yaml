@@ -1,0 +1,121 @@
+# Canonical machine-readable evaluation result.
+# Keep values identical to the companion evaluation-report.md.
+schema_version: "1.0"
+
+assignment:
+  id: "{{assignment.id}}"
+  name: "{{assignment.name}}"
+  course: "{{assignment.course}}"
+
+student:
+  id: null
+  name: null
+
+rubric:
+  schema_version: "1.0"
+  source: "{{rubric.source}}"
+
+submission:
+  type: "zip" # git | zip | files
+  location: "{{submission.location}}"
+  revision: null
+  submitted_at: null
+
+evaluation:
+  id: "{{evaluation.id}}"
+  date: "{{evaluation.date}}" # ISO 8601 date or timestamp
+  evaluator_version: "1.0"
+  status: "pending_teacher_review"
+  mode: "static" # static | both
+
+project:
+  technologies: []
+  selected_profiles: []
+  structure_summary: "{{project.structure_summary}}"
+  detection_evidence: []
+
+grading:
+  percentage: null
+  percentage_precision: null # retain sufficient precision to reproduce conversion
+  grade: null
+  grade_scale:
+    name: null
+    minimum: null
+    maximum: null
+    passing_grade: null
+    decimal_places: null
+    conversion: []
+  passing_threshold_percentage: null
+  passed: null
+  rounding_mode: null # half_up | half_even | floor | ceiling
+  rounding_stage: null # score | grade
+  missing_evidence_policy: null # proportional | none
+  calculation: "{{calculation.formula_and_subtotals}}"
+  criteria:
+    - id: "C01"
+      name: "{{criterion.name}}"
+      weight: 0
+      score: null
+      max_score: 10
+      contribution: null
+      indicators:
+        - id: "I01"
+          description: "{{indicator.description}}"
+          weight: 100
+          performance_level: null
+          score: null
+          max_score: 10
+          verification_status: "not_verifiable" # verified | partially_verified | not_found | not_verifiable
+          justification: "{{indicator.justification}}"
+          evidence_refs: []
+          findings: []
+
+findings:
+  - id: "F001"
+    criterion_id: "C01"
+    indicator_id: "I01"
+    severity: "medium" # critical | high | medium | low
+    title: "{{finding.title}}"
+    description: "{{finding.description}}"
+    expected_behavior: "{{expected.behavior}}"
+    observed_behavior: "{{observed.behavior}}"
+    evidence_refs:
+      - "E001"
+    scoring_impact: "{{finding.scoring_impact}}"
+    recommendation: "{{finding.recommendation}}"
+
+evidence:
+  - id: "E001"
+    type: "source_code" # source_code | project_structure | test | build | static_analysis | documentation | configuration
+    file: "{{relative/path/to/file}}"
+    line_start: null
+    line_end: null
+    symbol: null
+    description: "{{evidence.description}}"
+    relevance: "{{criterion_or_indicator_reference}}"
+
+technical_checks:
+  - name: "{{check.name}}"
+    command: null
+    environment: "{{environment_or_not_run}}"
+    status: "not_run" # passed | failed | inconclusive | not_run
+    summary: "{{check.summary}}"
+    output_excerpt: null
+
+unverifiable_items:
+  - criterion_id: "C01"
+    indicator_id: "I01"
+    reason: "{{why_not_verifiable}}"
+    scoring_impact: "{{how_policy_was_applied}}"
+
+observations: []
+recommendations: []
+technical_limitations: []
+
+teacher_review:
+  status: "pending_teacher_review" # pending_teacher_review | approved | rejected
+  decision: null
+  reviewer: null
+  date: null
+  comments: null
+  adjustments: [] # record original_score, revised_score, reason, teacher, date

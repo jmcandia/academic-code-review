@@ -1,0 +1,22 @@
+schema_version: "1.0"
+fixture_id: csharp-aspnet
+expected_technologies: [.NET 8, C#, ASP.NET Core Minimal API]
+defects:
+  - {id: F-CS-01, severity: high, criterion_id: C02, indicator_id: I03, location: {path: "Api/Program.cs", line: 6}, symptom: "An enrollment request without a course ID is accepted with HTTP 200.", rationale: "CourseId is nullable and no request validation returns 400."}
+  - {id: F-CS-02, severity: medium, criterion_id: C04, indicator_id: I07, location: {path: "Api/Program.cs", line: 8}, symptom: "The endpoint blocks on Task.Result.", rationale: "The asynchronous service result is synchronously waited on instead of awaited."}
+non_findings:
+  - {id: NF-CS-01, rationale: "Minimal APIs satisfy the assignment; controllers are not required."}
+  - {id: NF-CS-02, rationale: "An in-memory course service is adequate for this fixture."}
+  - {id: NF-CS-03, rationale: "The service uses Task-based asynchronous results."}
+expected_score:
+  percentage: 80
+  grade: 5.5
+  passed: true
+  teacher_review_status: pending_teacher_review
+  indicator_scoring_rule: "Each criterion averages its two 50%-weighted indicators. All indicators receive 10/10 except I03 and I07, which receive 0/10."
+  indicator_scores: [{id: I01, score: 10}, {id: I02, score: 10}, {id: I03, score: 0}, {id: I04, score: 10}, {id: I05, score: 10}, {id: I06, score: 10}, {id: I07, score: 0}, {id: I08, score: 10}, {id: I09, score: 10}, {id: I10, score: 10}]
+  criteria: [{id: C01, score: 10, max_score: 10, contribution: 20}, {id: C02, score: 5, max_score: 10, contribution: 10}, {id: C03, score: 10, max_score: 10, contribution: 20}, {id: C04, score: 5, max_score: 10, contribution: 10}, {id: C05, score: 10, max_score: 10, contribution: 20}]
+execution_expectations:
+  static_only_conclusion: "The missing-input path and blocking call are visible statically; endpoint runtime remains unverified."
+  isolated_run_expected: true
+  expected_checks: ["dotnet test compiles", "valid enrollment integration test passes", "missing course ID test fails because the endpoint returns 200"]

@@ -141,6 +141,7 @@ Record:
 - File path.
 - Line references when available.
 - Verification status.
+- Selected performance level and rubric descriptor when defined.
 - Awarded score.
 - Maximum score.
 - Justification.
@@ -232,6 +233,10 @@ Use the templates:
 - templates/evaluation-result.yaml
 
 All formats must represent identical evaluation results.
+
+Use `tests/` only when explicitly asked to validate or benchmark
+this skill. Keep fixture submissions separate from their expected
+results so evaluation runs cannot consult the answer key.
 
 Include:
 

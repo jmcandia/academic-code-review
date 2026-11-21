@@ -38,6 +38,11 @@ The evaluator must consider:
 
 Scores must not exceed the configured maximum.
 
+When a rubric defines discrete performance levels, select the level whose
+descriptor best matches the evidence and award its configured percentage
+of the indicator maximum. Do not create intermediate levels unless the
+rubric authorizes them. Record the selected level and descriptor.
+
 ### 3.1 Evidence-based scoring
 
 For each indicator, record:
@@ -47,6 +52,7 @@ For each indicator, record:
 - Observed implementation.
 - Evidence references.
 - Verification status.
+- Selected performance level and descriptor when the rubric defines discrete levels.
 - Awarded score.
 - Maximum score.
 - Justification.

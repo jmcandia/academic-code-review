@@ -1,0 +1,56 @@
+schema_version: "1.0"
+assignment: { id: PY-DJ-01, name: Inventory API, description: "Django API for owned inventory items with validation and tests.", course: Software Development, language: Python, framework: Django }
+grading:
+  total_weight: 100
+  scale:
+    name: Institutional 1–7
+    minimum: 1.0
+    maximum: 7.0
+    passing_grade: 4.0
+    decimal_places: 1
+    rounding: half_up
+    conversion: [{percentage: 0, grade: 1.0}, {percentage: 60, grade: 4.0}, {percentage: 100, grade: 7.0}]
+  passing: { minimum_percentage: 60 }
+  missing_evidence_policy: proportional
+  rounding_stage: grade
+  report_formats: [markdown, yaml]
+performance_levels:
+  - {id: excellent, percentage: 100, label: Excellent, description: Complete and verified.}
+  - {id: good, percentage: 80, label: Good, description: Minor omission only.}
+  - {id: acceptable, percentage: 60, label: Acceptable, description: Essential behavior with notable limits.}
+  - {id: emerging, percentage: 30, label: Emerging, description: Partial implementation with major errors.}
+  - {id: not_achieved, percentage: 0, label: Not achieved, description: Missing or incorrect behavior.}
+criteria:
+  - id: C01
+    name: Item operations
+    description: List, create and update inventory items.
+    weight: 20
+    max_score: 10
+    indicators: [{id: I01, description: List and create items correctly., weight: 50}, {id: I02, description: Update only the requested item fields., weight: 50}]
+  - id: C02
+    name: Input validation
+    description: Validate required values and stock boundaries.
+    weight: 20
+    max_score: 10
+    indicators: [{id: I03, description: Reject blank item names., weight: 50}, {id: I04, description: Reject negative stock quantities on update., weight: 50}]
+  - id: C03
+    name: Ownership and API responses
+    description: Enforce ownership and return appropriate responses.
+    weight: 20
+    max_score: 10
+    indicators: [{id: I05, description: Prevent updates by users who do not own the item., weight: 50}, {id: I06, description: Return documented success and error statuses., weight: 50}]
+  - id: C04
+    name: Architecture and persistence
+    description: Use Django models and focused request handlers.
+    weight: 20
+    max_score: 10
+    indicators: [{id: I07, description: Persist item fields through the model layer., weight: 50}, {id: I08, description: Keep handlers focused and use appropriate HTTP methods., weight: 50}]
+  - id: C05
+    name: Verification and documentation
+    description: Provide meaningful tests and setup instructions.
+    weight: 20
+    max_score: 10
+    indicators: [{id: I09, description: Test successful and rejected request paths., weight: 50}, {id: I10, description: Document environment and local startup., weight: 50}]
+student: {id: null, name: null}
+submission: {type: zip, location: tests/fixtures/python-django/submission, submitted_at: null, commit: null}
+evaluation: {status: pending, evaluator_version: "1.0", include_line_references: true, include_recommendations: true, teacher_validation_required: true}

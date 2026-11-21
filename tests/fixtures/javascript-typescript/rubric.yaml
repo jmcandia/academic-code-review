@@ -1,0 +1,24 @@
+schema_version: "1.0"
+assignment: {id: JS-TS-01, name: Search Interface, description: "TypeScript async search UI with validation, race-safe results, and complete status handling.", course: Software Development, language: TypeScript, framework: Framework-neutral browser client}
+grading:
+  total_weight: 100
+  scale: {name: Institutional 1–7, minimum: 1.0, maximum: 7.0, passing_grade: 4.0, decimal_places: 1, rounding: half_up, conversion: [{percentage: 0, grade: 1.0}, {percentage: 60, grade: 4.0}, {percentage: 100, grade: 7.0}]}
+  passing: {minimum_percentage: 60}
+  missing_evidence_policy: proportional
+  rounding_stage: grade
+  report_formats: [markdown, yaml]
+performance_levels:
+  - {id: excellent, percentage: 100, label: Excellent, description: Complete and verified.}
+  - {id: good, percentage: 80, label: Good, description: Minor omission only.}
+  - {id: acceptable, percentage: 60, label: Acceptable, description: Essential behavior with notable limits.}
+  - {id: emerging, percentage: 30, label: Emerging, description: Partial implementation with major errors.}
+  - {id: not_achieved, percentage: 0, label: Not achieved, description: Missing or incorrect behavior.}
+criteria:
+  - {id: C01, name: Search behavior, description: Request and display results consistently., weight: 20, max_score: 10, indicators: [{id: I01, description: Show results for the latest query., weight: 50}, {id: I02, description: Preserve the query so a user can search again., weight: 50}]}
+  - {id: C02, name: Validation and async state, description: Validate input and handle request lifecycle., weight: 20, max_score: 10, indicators: [{id: I03, description: Reject blank queries before requesting., weight: 50}, {id: I04, description: Catch request failures and set an error state., weight: 50}]}
+  - {id: C03, name: User feedback, description: Display loading and current results., weight: 20, max_score: 10, indicators: [{id: I05, description: Show loading while the active request runs., weight: 50}, {id: I06, description: Render returned results in the result list., weight: 50}]}
+  - {id: C04, name: Structure and typing, description: Separate request logic and UI state with useful types., weight: 20, max_score: 10, indicators: [{id: I07, description: Use typed result and state contracts., weight: 50}, {id: I08, description: Keep search operation modular and maintainable., weight: 50}]}
+  - {id: C05, name: Verification and documentation, description: Test behavior and document setup., weight: 20, max_score: 10, indicators: [{id: I09, description: Cover success, rejection, and overlapping requests., weight: 50}, {id: I10, description: Document build and run commands., weight: 50}]}
+student: {id: null, name: null}
+submission: {type: zip, location: tests/fixtures/javascript-typescript/submission, submitted_at: null, commit: null}
+evaluation: {status: pending, evaluator_version: "1.0", include_line_references: true, include_recommendations: true, teacher_validation_required: true}

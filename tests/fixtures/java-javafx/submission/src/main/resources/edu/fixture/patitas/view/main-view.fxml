@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fixture.patitas.controller.MainController">
+  <left><VBox spacing="8" prefWidth="260">
+    <Label text="Register pet" />
+    <TextField fx:id="nameInput" promptText="Name" />
+    <TextField fx:id="ageInput" promptText="Age" />
+    <TextField fx:id="weightInput" promptText="Weight (kg)" />
+    <Button text="Register" onAction="#handleRegister" />
+  </VBox></left>
+  <center><VBox spacing="8">
+    <HBox spacing="8"><TextField fx:id="searchInput" promptText="Search by name" /><Button text="Delete selected" onAction="#handleDelete" /></HBox>
+    <TableView fx:id="petTable"><columns>
+      <TableColumn fx:id="nameColumn" text="Name" />
+      <TableColumn fx:id="ageColumn" text="Age" />
+    </columns></TableView>
+  </VBox></center>
+  <bottom><Label fx:id="message" /></bottom>
+</BorderPane>

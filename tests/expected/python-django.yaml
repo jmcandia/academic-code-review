@@ -1,0 +1,22 @@
+schema_version: "1.0"
+fixture_id: python-django
+expected_technologies: [Python 3, Django, SQLite]
+defects:
+  - {id: F-PY-01, severity: critical, criterion_id: C03, indicator_id: I05, location: {path: "catalog/views.py", line: 27}, symptom: "An authenticated user can update an item owned by another user.", rationale: "The lookup filters by item ID without scoping it to request.user."}
+  - {id: F-PY-02, severity: high, criterion_id: C02, indicator_id: I04, location: {path: "catalog/views.py", line: 34}, symptom: "The update endpoint accepts a negative stock count.", rationale: "The create route checks the lower bound, but the update route assigns the parsed value directly."}
+non_findings:
+  - {id: NF-PY-01, rationale: "SQLite is explicitly used for this small test fixture."}
+  - {id: NF-PY-02, rationale: "A single Django app is sufficient for the assignment scope."}
+  - {id: NF-PY-03, rationale: "The list endpoint scopes returned items to the authenticated owner."}
+expected_score:
+  percentage: 80
+  grade: 5.5
+  passed: true
+  teacher_review_status: pending_teacher_review
+  indicator_scoring_rule: "Each criterion averages its two 50%-weighted indicators. All indicators receive 10/10 except I04 and I05, which receive 0/10."
+  indicator_scores: [{id: I01, score: 10}, {id: I02, score: 10}, {id: I03, score: 10}, {id: I04, score: 0}, {id: I05, score: 0}, {id: I06, score: 10}, {id: I07, score: 10}, {id: I08, score: 10}, {id: I09, score: 10}, {id: I10, score: 10}]
+  criteria: [{id: C01, score: 10, max_score: 10, contribution: 20}, {id: C02, score: 5, max_score: 10, contribution: 10}, {id: C03, score: 5, max_score: 10, contribution: 10}, {id: C04, score: 10, max_score: 10, contribution: 20}, {id: C05, score: 10, max_score: 10, contribution: 20}]
+execution_expectations:
+  static_only_conclusion: "Both defects are visible in the update handler; endpoint execution remains unverified."
+  isolated_run_expected: true
+  expected_checks: ["Django test runner completes", "owner update test fails with unauthorized update", "negative stock update test fails because response is successful"]

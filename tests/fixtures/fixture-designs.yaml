@@ -1,0 +1,39 @@
+schema_version: "1.0"
+# Design contracts for fixture construction. Keep expected defects in expected/.
+fixtures:
+  - id: python-django
+    assignment: "See tests/fixtures/python-django/assignment.md."
+    rubric: "tests/fixtures/python-django/rubric.yaml"
+    planted_defects: ["update endpoint permits cross-owner modification", "negative stock quantity accepted on update"]
+    non_findings: ["SQLite used for a small classroom fixture", "single Django app structure"]
+    execution_checks: ["valid CRUD flow", "reject negative quantity", "reject update by non-owner"]
+  - id: java-spring-boot
+    assignment: "See tests/fixtures/java-spring-boot/assignment.md."
+    rubric: "tests/fixtures/java-spring-boot/rubric.yaml"
+    planted_defects: ["invalid request reaches persistence", "missing record maps to success response"]
+    non_findings: ["constructor injection without Lombok", "in-memory repository for the fixture"]
+    execution_checks: ["valid task create/read", "blank title returns client error", "unknown task returns 404"]
+  - id: csharp-aspnet
+    assignment: "See tests/fixtures/csharp-aspnet/assignment.md."
+    rubric: "tests/fixtures/csharp-aspnet/rubric.yaml"
+    planted_defects: ["enrollment endpoint accepts a missing course identifier", "async action blocks on task result"]
+    non_findings: ["minimal API instead of controllers", "framework defaults for JSON serialization"]
+    execution_checks: ["valid enrollment", "missing identifier rejected", "API responses remain successful for valid records"]
+  - id: java-javafx
+    assignment: "See tests/fixtures/java-javafx/assignment.md; mapped from the 13 weighted DSY1102 indicators."
+    rubric: "tests/fixtures/java-javafx/rubric.yaml"
+    planted_defects: ["single view instead of separate registration view", "delete success feedback absent", "controller holds form validation", "form range checks incomplete", "delete is not persisted"]
+    non_findings: ["single Java module", "separated MVC and persistence packages", "observable table and live filter"]
+    execution_checks: ["Maven compile", "add persistence passes", "delete persistence regression fails"]
+  - id: javascript-typescript
+    assignment: "See tests/fixtures/javascript-typescript/assignment.md."
+    rubric: "tests/fixtures/javascript-typescript/rubric.yaml"
+    planted_defects: ["request race allows older response to replace newer results", "network rejection leaves loading state active"]
+    non_findings: ["native fetch rather than a client library", "framework-free DOM rendering"]
+    execution_checks: ["empty query rejected", "latest query wins", "network error exits loading state"]
+  - id: kotlin-android
+    assignment: "See tests/fixtures/kotlin-android/assignment.md."
+    rubric: "tests/fixtures/kotlin-android/rubric.yaml"
+    planted_defects: ["blank note can be persisted", "screen recreation discards unsaved form state"]
+    non_findings: ["XML views rather than Compose", "simple in-memory repository where persistence is not required across process restart"]
+    execution_checks: ["valid note saved once", "blank note rejected", "rotation preserves draft text"]

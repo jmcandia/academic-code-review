@@ -52,6 +52,30 @@ grading:
     - json
     - html
 
+# Optional shared discrete achievement levels. Use exact percentages
+# supplied by the instructor; do not invent intermediate scores.
+performance_levels:
+  - id: "excellent"
+    percentage: 100
+    label: "Excellent"
+    description: "Complete implementation with evidence of expected behavior."
+  - id: "good"
+    percentage: 80
+    label: "Good"
+    description: "Minor omissions that do not affect the main flow."
+  - id: "acceptable"
+    percentage: 60
+    label: "Acceptable"
+    description: "Essential requirements met with notable limitations."
+  - id: "emerging"
+    percentage: 30
+    label: "Emerging"
+    description: "Partial work with important errors or incomplete integration."
+  - id: "not_achieved"
+    percentage: 0
+    label: "Not achieved"
+    description: "Requirement is missing or incorrect."
+
 criteria:
   - id: "C01"
     name: "Criterion name"
@@ -72,6 +96,11 @@ criteria:
       full_compliance: "All indicators are satisfied."
       partial_compliance: "Some indicators are satisfied."
       non_compliance: "No indicators are satisfied."
+
+    # Optional. Override a shared level descriptor for this criterion.
+    performance_level_overrides:
+      excellent: "Criterion-specific descriptor for full achievement."
+      good: "Criterion-specific descriptor for minor omissions."
 
     evidence_required: true
 

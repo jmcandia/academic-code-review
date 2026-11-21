@@ -1,0 +1,40 @@
+schema_version: "1.0"
+# Evaluator-only answer key. Do not provide this file to the reviewing agent.
+grading_fixture: "The five non-JavaFX fixtures use five equally weighted criteria and ten equally weighted indicators. The JavaFX fixture uses its 13 source-rubric weights. All use a 1.0–7.0 scale with 60% mapped to 4.0 and 100% to 7.0."
+fixtures:
+  - fixture_id: python-django
+    expected_technologies: [Python 3, Django, SQLite]
+    defects: [owner authorization missing on update, negative quantity not rejected]
+    non_findings: [SQLite, single app]
+    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Both defects are identifiable statically; runtime behavior remains unverified.", isolated_run_expected: true }
+  - fixture_id: java-spring-boot
+    expected_technologies: [Java 21, Spring Boot, Maven, Spring MVC]
+    defects: [request validation not enforced, missing entity mapped to success]
+    non_findings: [constructor injection, in-memory repository]
+    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Validation wiring and error mapping are inspectable; runtime API behavior remains unverified.", isolated_run_expected: true }
+  - fixture_id: csharp-aspnet
+    expected_technologies: [C#, ASP.NET Core]
+    defects: [missing course identifier accepted, async service call blocked with Task.Result]
+    non_findings: [minimal APIs, in-memory service]
+    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Missing validation and blocking call are inspectable; endpoint behavior remains unverified.", isolated_run_expected: true }
+  - fixture_id: java-javafx
+    expected_technologies: [Java 21, JavaFX, FXML, Maven, Gson]
+    defects: [separate registration view missing, delete confirmation missing, validation concentrated in controller, form range checks incomplete, deletion not persisted]
+    non_findings: [one Java module, layered package structure, observable table and dynamic filter]
+    expected_score: { percentage: 73.3, grade: 5.0, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Intentional defects are identifiable from source; compile and runtime outcomes remain unverified.", isolated_run_expected: true }
+  - fixture_id: javascript-typescript
+    expected_technologies: [TypeScript, Node.js, Node test runner]
+    defects: [stale request can overwrite latest result, rejection leaves loading active]
+    non_findings: [native fetch, framework-free DOM]
+    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Async race and missing rejection cleanup are inspectable; browser behavior remains unverified.", isolated_run_expected: true }
+  - fixture_id: kotlin-android
+    expected_technologies: [Kotlin, Android]
+    defects: [blank note accepted, draft not retained after recreation]
+    non_findings: [XML views, repository object for stated persistence scope]
+    expected_score: { percentage: 80, grade: 5.5, passed: true, teacher_review_status: pending_teacher_review }
+    execution_expectations: { static_only_conclusion: "Validation and lifecycle-state handling are inspectable; device behavior remains unverified.", isolated_run_expected: true }

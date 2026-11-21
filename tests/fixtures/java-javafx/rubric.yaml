@@ -1,0 +1,196 @@
+schema_version: "1.0"
+assignment:
+  id: DSY1102-EP2-FIXTURE
+  name: Clínica Patitas — JavaFX desktop application
+  description: "Implement a JavaFX application with FXML, observable table/search, MVC layers, validated registration, navigation, and DAO/Repository JSON persistence."
+  course: DSY1102 Programación Orientada a Objetos
+  language: Java
+  framework: JavaFX
+
+grading:
+  total_weight: 100
+  scale:
+    name: Escala institucional 1.0–7.0
+    minimum: 1.0
+    maximum: 7.0
+    passing_grade: 4.0
+    decimal_places: 1
+    rounding: half_up
+    conversion:
+      - { percentage: 0, grade: 1.0 }
+      - { percentage: 60, grade: 4.0 }
+      - { percentage: 100, grade: 7.0 }
+  passing:
+    minimum_percentage: 60
+  missing_evidence_policy: proportional
+  rounding_stage: grade
+  report_formats: [markdown, yaml]
+
+performance_levels:
+  - { id: excellent, percentage: 100, label: "Muy buen desempeño", description: "Implementación completa, coherente y funcional según el descriptor del indicador." }
+  - { id: good, percentage: 80, label: "Buen desempeño", description: "Omisiones menores que no afectan el flujo principal." }
+  - { id: acceptable, percentage: 60, label: "Desempeño aceptable", description: "Cumple lo esencial con limitaciones o validación/integración parcial." }
+  - { id: emerging, percentage: 30, label: "Desempeño incipiente", description: "Avances parciales con errores importantes o integración incompleta." }
+  - { id: not_achieved, percentage: 0, label: "Desempeño no logrado", description: "No evidencia el logro o la implementación es inoperable." }
+
+criteria:
+  - id: IE-2.1.1
+    name: Proyecto, módulos y punto de inicio
+    description: "Configura dependencias JavaFX y Gson, módulos, acceso FXML y clase de inicio que carga la vista."
+    weight: 8
+    max_score: 100
+    indicators: [{ id: I-2.1.1, description: "El proyecto configura sus dependencias, módulos y arranque.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Dependencias y module-info.java correctos; Launcher delega a Application; la aplicación carga FXML y compila y ejecuta."
+      good: "Compila y ejecuta con una omisión menor de módulos o plugin que no afecta el flujo principal."
+      acceptable: "Compila, pero no inicia correctamente o muestra fallos de configuración relevantes."
+      emerging: "La configuración existe pero impide compilar o ejecutar."
+      not_achieved: "No hay configuración válida ni aplicación ejecutable."
+  - id: IE-2.2.1
+    name: Vistas FXML y vinculación
+    description: "Diseña las vistas requeridas en FXML y vincula componentes y controladores correctamente."
+    weight: 10
+    max_score: 100
+    indicators: [{ id: I-2.2.1, description: "Vistas y componentes quedan vinculados a sus controladores.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Existen al menos dos vistas FXML completas; controles, fx:id e inyección corresponden a sus controladores."
+      good: "Las vistas y vínculos funcionan, con una omisión menor en un identificador o tipo."
+      acceptable: "Las vistas existen y tienen componentes necesarios, pero hay problemas de vinculación: atributos sin anotar, identificadores inconsistentes o controlador no referenciado en alguna vista."
+      emerging: "Las vistas existen, pero están incompletas: faltan componentes requeridos o la vinculación con el controlador no está implementada."
+      not_achieved: "No hay vistas FXML operativas ni controlador vinculado."
+  - id: IE-2.3.1
+    name: Inicialización y eventos
+    description: "Inicializa controles y colecciones y registra los eventos de interacción."
+    weight: 6
+    max_score: 100
+    indicators: [{ id: I-2.3.1, description: "El controlador configura componentes y manejadores de eventos.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Todos los controles requeridos se inicializan y sus eventos funcionan."
+      good: "La configuración principal funciona; falta un evento menor."
+      acceptable: "Inicialización parcial o eventos importantes ausentes."
+      emerging: "Inicialización casi vacía y eventos incorrectos o dispersos."
+      not_achieved: "No inicializa ni registra eventos."
+  - id: IE-2.3.2
+    name: Retroalimentación visual
+    description: "Muestra mensajes de éxito, validación y operaciones de eliminación."
+    weight: 6
+    max_score: 100
+    indicators: [{ id: I-2.3.2, description: "La vista informa el resultado de las interacciones.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Mensajes descriptivos y actualizados para registro, validación y eliminación."
+      good: "Cubre los casos principales con una omisión secundaria o texto genérico."
+      acceptable: "Retroalimentación solo en algunos escenarios."
+      emerging: "Mensajes fuera de la vista o no integrados."
+      not_achieved: "Sin retroalimentación visual."
+  - id: IE-2.4.1
+    name: Organización por capas
+    description: "Separa vista, controlador, modelo y persistencia en paquetes con responsabilidades coherentes."
+    weight: 8
+    max_score: 100
+    indicators: [{ id: I-2.4.1, description: "La estructura de paquetes refleja las capas requeridas.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Paquetes separados y dependencias compatibles con MVC."
+      good: "Una clase está ubicada incorrectamente o hay una dependencia cruzada menor."
+      acceptable: "Solo se distinguen parcialmente las responsabilidades."
+      emerging: "La mayoría de las clases convive en uno o dos paquetes."
+      not_achieved: "No hay separación de paquetes."
+  - id: IE-2.4.2
+    name: Delegación a modelo y persistencia
+    description: "El controlador delega lógica de negocio y acceso a datos."
+    weight: 7
+    max_score: 100
+    indicators: [{ id: I-2.4.2, description: "El controlador evita implementar lógica de negocio y acceso a archivos.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "La lógica de negocio y persistencia se delega completamente."
+      good: "La mayoría se delega; solo queda una validación simple en el controlador."
+      acceptable: "Hay mezcla visible de responsabilidades."
+      emerging: "La mayor parte de la lógica vive en el controlador."
+      not_achieved: "El controlador contiene toda la lógica del sistema."
+  - id: IE-2.5.1
+    name: Tabla y colección observable
+    description: "Usa colección observable y enlaza columnas a atributos del modelo."
+    weight: 10
+    max_score: 100
+    indicators: [{ id: I-2.5.1, description: "La tabla refleja la colección y las propiedades del modelo.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Tabla, columnas y colección observable funcionan al cargar."
+      good: "Funciona con una columna o propiedad menor incorrecta."
+      acceptable: "Tabla presente pero sin observable o con enlaces deficientes."
+      emerging: "Tabla presente, pero no muestra datos correctamente."
+      not_achieved: "No existe tabla integrada."
+  - id: IE-2.5.2
+    name: Filtrado dinámico
+    description: "Filtra en tiempo real sin alterar la colección de origen."
+    weight: 10
+    max_score: 100
+    indicators: [{ id: I-2.5.2, description: "La búsqueda actualiza dinámicamente las filas visibles.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "FilteredList deriva de la fuente observable y responde al cambio del criterio."
+      good: "Filtra correctamente con actualización no inmediata o sobre una copia."
+      acceptable: "Filtrado parcial o recarga repetida desde persistencia."
+      emerging: "El filtro borra o altera datos originales."
+      not_achieved: "No hay búsqueda funcional."
+  - id: IE-2.6.1
+    name: Navegación entre vistas
+    description: "Abre y cierra la vista secundaria y transfiere contexto cuando es necesario."
+    weight: 8
+    max_score: 100
+    indicators: [{ id: I-2.6.1, description: "La navegación comunica cambios a la vista principal.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Abre/cierra la vista secundaria, transfiere datos y actualiza la principal."
+      good: "Navega, pero requiere actualización manual menor."
+      acceptable: "La vista secundaria existe, pero no transfiere contexto."
+      emerging: "La navegación no permite completar el flujo."
+      not_achieved: "No existe vista secundaria ni navegación."
+  - id: IE-2.6.2
+    name: Validación del formulario
+    description: "Valida requeridos y rangos; comunica errores y conserva entradas inválidas."
+    weight: 7
+    max_score: 100
+    indicators: [{ id: I-2.6.2, description: "El formulario valida datos antes de procesarlos.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Valida campos y rangos y mantiene los datos para corrección."
+      good: "Cubre campos requeridos y rangos principales con una limitación menor."
+      acceptable: "Validación parcial sin cubrir rangos de negocio."
+      emerging: "Solo valida un campo o deja excepciones sin mensaje controlado."
+      not_achieved: "Procesa datos sin validarlos."
+  - id: IE-2.7.1
+    name: DAO y Repository
+    description: "Interfaz DAO, implementación JSON y Repository que centraliza operaciones."
+    weight: 8
+    max_score: 100
+    indicators: [{ id: I-2.7.1, description: "Repository delega lectura y escritura al DAO.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Interfaz, DAO y Repository separados; el repositorio centraliza la colección."
+      good: "Estructura funcional con una omisión menor en la interfaz o delegación."
+      acceptable: "Hay acceso a archivos, pero falta una capa requerida."
+      emerging: "Persistencia dispersa fuera de DAO/Repository."
+      not_achieved: "No hay capa de acceso a datos."
+  - id: IE-2.7.2
+    name: Carga y consistencia persistente
+    description: "Carga al inicio y persiste automáticamente cada alta y eliminación."
+    weight: 7
+    max_score: 100
+    indicators: [{ id: I-2.7.2, description: "Memoria y archivos se mantienen sincronizados.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Carga inicial y persiste automáticamente altas y eliminaciones."
+      good: "Carga y guarda casi todos los cambios; una operación puede omitirse."
+      acceptable: "Carga inicial correcta, pero guardado incompleto o manual."
+      emerging: "Archivo existe, pero carga o contenido no coincide con la UI."
+      not_achieved: "No hay ciclo de persistencia."
+  - id: IE-2.8.1
+    name: Flujo integrado y ejecutable
+    description: "Inicia, carga datos y permite registrar, buscar, eliminar y persistir el flujo completo."
+    weight: 5
+    max_score: 100
+    indicators: [{ id: I-2.8.1, description: "La aplicación completa el flujo de usuario de principio a fin.", weight: 100 }]
+    performance_level_overrides:
+      excellent: "Todo el flujo funciona y persiste tras reiniciar."
+      good: "Flujo completo con un fallo secundario aislado."
+      acceptable: "La mayoría funciona, pero una función principal falla."
+      emerging: "La interfaz inicia, pero múltiples funciones principales fallan."
+      not_achieved: "No inicia o el flujo principal es inoperable."
+
+student: { id: null, name: null }
+submission: { type: zip, location: "tests/fixtures/java-javafx/submission", submitted_at: null, commit: null }
+evaluation: { status: pending, evaluator_version: "1.0", include_line_references: true, include_recommendations: true, teacher_validation_required: true }

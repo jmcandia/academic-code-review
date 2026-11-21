@@ -1,0 +1,22 @@
+schema_version: "1.0"
+fixture_id: kotlin-android
+expected_technologies: [Kotlin, Android, Gradle, XML Views]
+defects:
+  - {id: F-KT-01, severity: high, criterion_id: C01, indicator_id: I02, location: {path: "app/src/main/java/edu/fixture/notes/MainActivity.kt", line: 11}, symptom: "The note draft is not saved or restored when the Activity is recreated.", rationale: "onCreate ignores savedInstanceState and does not restore EditText content."}
+  - {id: F-KT-02, severity: medium, criterion_id: C02, indicator_id: I03, location: {path: "app/src/main/java/edu/fixture/notes/NoteRepository.kt", line: 6}, symptom: "Blank note content is stored as a valid note.", rationale: "The repository accepts every string without checking blank input."}
+non_findings:
+  - {id: NF-KT-01, rationale: "XML layouts are allowed; Jetpack Compose is not required."}
+  - {id: NF-KT-02, rationale: "An in-memory repository is sufficient for this fixture's stated persistence boundary."}
+  - {id: NF-KT-03, rationale: "The Activity delegates note storage to a separate repository object."}
+expected_score:
+  percentage: 80
+  grade: 5.5
+  passed: true
+  teacher_review_status: pending_teacher_review
+  indicator_scoring_rule: "Each criterion averages its two 50%-weighted indicators. All indicators receive 10/10 except I02 and I03, which receive 0/10."
+  indicator_scores: [{id: I01, score: 10}, {id: I02, score: 0}, {id: I03, score: 0}, {id: I04, score: 10}, {id: I05, score: 10}, {id: I06, score: 10}, {id: I07, score: 10}, {id: I08, score: 10}, {id: I09, score: 10}, {id: I10, score: 10}]
+  criteria: [{id: C01, score: 5, max_score: 10, contribution: 10}, {id: C02, score: 5, max_score: 10, contribution: 10}, {id: C03, score: 10, max_score: 10, contribution: 20}, {id: C04, score: 10, max_score: 10, contribution: 20}, {id: C05, score: 10, max_score: 10, contribution: 20}]
+execution_expectations:
+  static_only_conclusion: "Blank-note handling is visible in repository code; lifecycle state loss is inspectable; Android build and device behavior remain unverified."
+  isolated_run_expected: true
+  expected_checks: ["Android unit tests compile", "valid note repository test passes", "blank-note test fails", "emulator recreation check confirms draft loss"]

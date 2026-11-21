@@ -1,0 +1,24 @@
+schema_version: "1.0"
+assignment: {id: KT-AND-01, name: Notes Screen, description: "Kotlin Android screen with input validation, repository persistence, and lifecycle-safe draft state.", course: Software Development, language: Kotlin, framework: Android}
+grading:
+  total_weight: 100
+  scale: {name: Institutional 1–7, minimum: 1.0, maximum: 7.0, passing_grade: 4.0, decimal_places: 1, rounding: half_up, conversion: [{percentage: 0, grade: 1.0}, {percentage: 60, grade: 4.0}, {percentage: 100, grade: 7.0}]}
+  passing: {minimum_percentage: 60}
+  missing_evidence_policy: proportional
+  rounding_stage: grade
+  report_formats: [markdown, yaml]
+performance_levels:
+  - {id: excellent, percentage: 100, label: Excellent, description: Complete and verified.}
+  - {id: good, percentage: 80, label: Good, description: Minor omission only.}
+  - {id: acceptable, percentage: 60, label: Acceptable, description: Essential behavior with notable limits.}
+  - {id: emerging, percentage: 30, label: Emerging, description: Partial implementation with major errors.}
+  - {id: not_achieved, percentage: 0, label: Not achieved, description: Missing or incorrect behavior.}
+criteria:
+  - {id: C01, name: Note flow, description: Create and display notes and maintain the current draft., weight: 20, max_score: 10, indicators: [{id: I01, description: Save and display valid notes., weight: 50}, {id: I02, description: Preserve draft text across Activity recreation., weight: 50}]}
+  - {id: C02, name: Validation and feedback, description: Reject invalid input and confirm valid saves., weight: 20, max_score: 10, indicators: [{id: I03, description: Reject blank note content., weight: 50}, {id: I04, description: Show confirmation after saving a valid note., weight: 50}]}
+  - {id: C03, name: Android lifecycle, description: Handle Activity lifecycle safely., weight: 20, max_score: 10, indicators: [{id: I05, description: Avoid duplicate listeners or stale Activity references., weight: 50}, {id: I06, description: Register UI callbacks safely., weight: 50}]}
+  - {id: C04, name: Architecture and storage, description: Delegate note operations to a repository., weight: 20, max_score: 10, indicators: [{id: I07, description: Keep persistence behind a repository contract., weight: 50}, {id: I08, description: Keep Activity focused on UI interaction., weight: 50}]}
+  - {id: C05, name: Verification and documentation, description: Test note behavior and document build setup., weight: 20, max_score: 10, indicators: [{id: I09, description: Test valid and invalid note operations., weight: 50}, {id: I10, description: Document Android SDK and build commands., weight: 50}]}
+student: {id: null, name: null}
+submission: {type: zip, location: tests/fixtures/kotlin-android/submission, submitted_at: null, commit: null}
+evaluation: {status: pending, evaluator_version: "1.0", include_line_references: true, include_recommendations: true, teacher_validation_required: true}

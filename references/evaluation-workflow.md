@@ -242,6 +242,8 @@ For each criterion:
 4. Verify expected behavior.
 5. Determine compliance.
 6. Assign indicator scores.
+   When the rubric uses discrete performance levels, record the selected
+   level identifier and descriptor and award exactly its configured value.
 7. Aggregate criterion scores.
 8. Calculate weighted contribution.
 9. Document justification.

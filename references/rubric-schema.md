@@ -67,6 +67,33 @@ max_score: 10
 
 The maximum score must be greater than zero.
 
+### 4.2.1 Discrete performance levels
+
+Rubrics may define a shared set of discrete performance levels when each
+criterion uses the same descriptive scale. Store the exact awarded score
+for each level; do not interpolate between levels unless the rubric
+explicitly allows it.
+
+```yaml
+performance_levels:
+  - id: "excellent"
+    percentage: 100
+    label: "Muy buen desempeño"
+    description: "Complete implementation and stable behavior."
+  - id: "good"
+    percentage: 80
+    label: "Buen desempeño"
+    description: "Minor omissions without affecting the main flow."
+```
+
+When present, each criterion may provide a descriptor override for any
+level. The score for a criterion is the selected level percentage times
+its maximum score. The final percentage remains the weighted sum of the
+criterion ratios. Validate that level identifiers are unique and level
+percentages are between 0 and 100. Preserve the rubric's order and labels.
+Criterion-specific overrides use `performance_level_overrides`, keyed by
+the shared level identifier.
+
 ### 4.3 Grading scale
 
 ```yaml
@@ -189,6 +216,12 @@ Each criterion must include:
 - max_score
 - indicators
 
+An indicator may also be represented as a criterion with one indicator
+when the source rubric assigns a direct overall weight to each indicator.
+In that case, retain the indicator's original identifier and description;
+use a single nested indicator at 100% so the canonical weight arithmetic
+remains valid. Do not invent category weights.
+
 Example:
 
 ```yaml
@@ -286,6 +319,8 @@ Before evaluation:
 7. Validate indicator weights.
 8. Validate score ranges.
 9. Validate submission type.
+10. When discrete performance levels are present, validate unique level IDs,
+    percentages within 0–100, and every criterion override references a defined level.
 
 An invalid rubric must not be silently corrected.
 

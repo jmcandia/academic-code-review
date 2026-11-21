@@ -1,0 +1,9 @@
+SECRET_KEY = "fixture-only-not-a-secret"
+DEBUG = False
+ALLOWED_HOSTS = ["testserver", "localhost"]
+ROOT_URLCONF = "config.urls"
+INSTALLED_APPS = ["django.contrib.auth", "django.contrib.contenttypes", "django.contrib.sessions", "catalog"]
+DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+MIDDLEWARE = ["django.contrib.sessions.middleware.SessionMiddleware", "django.contrib.auth.middleware.AuthenticationMiddleware"]
+USE_TZ = True

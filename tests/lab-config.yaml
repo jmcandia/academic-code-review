@@ -1,0 +1,28 @@
+schema_version: "1.0"
+lab_id: academic-code-review-cross-technology
+mode: both
+projects: all
+fixture_ids:
+  - python-django
+  - java-spring-boot
+  - csharp-aspnet
+  - java-javafx
+  - javascript-typescript
+  - kotlin-android
+execution:
+  requires_isolated_environment: true
+  network: disabled
+  secrets: none
+  host_filesystem_access: none
+  timeout_seconds: 600
+  memory_limit_mb: 2048
+comparison:
+  matching: defect_id_and_evidence
+  require_file_and_line_evidence: true
+  count_unsupported_findings_as_false_positives: true
+  separate_static_and_execution_findings: true
+  preserve_raw_reports: true
+score_expectations:
+  rounding: half_up
+  tolerance_percentage_points: 0.01
+  teacher_review_status: pending_teacher_review

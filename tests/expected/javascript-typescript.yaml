@@ -1,0 +1,22 @@
+schema_version: "1.0"
+fixture_id: javascript-typescript
+expected_technologies: [TypeScript, Node.js, Node test runner]
+defects:
+  - {id: F-JS-01, severity: high, criterion_id: C01, indicator_id: I01, location: {path: "src/search.ts", line: 16}, symptom: "A slower response for an older query overwrites the latest query results.", rationale: "No request sequence or cancellation guard prevents stale responses from committing."}
+  - {id: F-JS-02, severity: medium, criterion_id: C02, indicator_id: I04, location: {path: "src/search.ts", line: 16}, symptom: "A rejected request is not caught and no error state is set.", rationale: "The function has no catch/finally cleanup around the awaited request; loading also remains active as a consequence."}
+non_findings:
+  - {id: NF-JS-01, rationale: "Native fetch/request injection is appropriate; an HTTP client library is not required."}
+  - {id: NF-JS-02, rationale: "The assignment permits framework-neutral TypeScript."}
+  - {id: NF-JS-03, rationale: "Blank queries are rejected before calling the request function."}
+expected_score:
+  percentage: 80
+  grade: 5.5
+  passed: true
+  teacher_review_status: pending_teacher_review
+  indicator_scoring_rule: "Each criterion averages its two 50%-weighted indicators. All indicators receive 10/10 except I01 and I04, which receive 0/10."
+  indicator_scores: [{id: I01, score: 0}, {id: I02, score: 10}, {id: I03, score: 10}, {id: I04, score: 0}, {id: I05, score: 10}, {id: I06, score: 10}, {id: I07, score: 10}, {id: I08, score: 10}, {id: I09, score: 10}, {id: I10, score: 10}]
+  criteria: [{id: C01, score: 5, max_score: 10, contribution: 10}, {id: C02, score: 5, max_score: 10, contribution: 10}, {id: C03, score: 10, max_score: 10, contribution: 20}, {id: C04, score: 10, max_score: 10, contribution: 20}, {id: C05, score: 10, max_score: 10, contribution: 20}]
+execution_expectations:
+  static_only_conclusion: "The stale-response race and missing rejection cleanup are identifiable statically; Node test results remain unverified."
+  isolated_run_expected: true
+  expected_checks: ["TypeScript build succeeds", "latest-query-wins test fails", "rejection cleanup test fails"]
