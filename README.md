@@ -1,6 +1,6 @@
 # Academic Code Review
 
-A Claude Agent Skill that evaluates student programming projects against weighted academic rubrics.
+An Agent Skill that evaluates student programming projects against weighted academic rubrics.
 
 It inspects Git repositories, ZIP archives and individual source files, collects verifiable evidence, calculates weighted scores and produces evaluation reports. Results are proposals: the teacher keeps final grading authority, and every evaluation starts as `pending_teacher_review`.
 
@@ -19,12 +19,21 @@ Projects that mix technologies get every relevant profile. Profiles guide techni
 
 ## Installation
 
-Copy this directory into your skills folder so that `SKILL.md` sits at its root:
+Install the skill from this public GitHub repository with the [`skills` CLI](https://www.skills.sh/docs/cli). You need Node.js and npm (the command runs through `npx`).
 
-- Personal: `~/.claude/skills/academic-code-review/`
-- Project: `.claude/skills/academic-code-review/`
+For a project-local installation, run this from the repository where you want to use the skill:
 
-Claude loads the skill when you ask it to review, assess or grade a student software assignment against a rubric.
+```sh
+npx skills add jmcandia/academic-code-review --skill academic-code-review
+```
+
+For a user-wide installation, add `-g`:
+
+```sh
+npx skills add jmcandia/academic-code-review --skill academic-code-review -g
+```
+
+The CLI prompts you to choose the agent(s) to configure. To select an agent explicitly, add `-a <agent>` (for example, `-a claude-code`). Check the CLI documentation for supported agents and options. After installation, ask your agent to review, assess or grade a student software assignment against a rubric. If the skill does not appear, restart the agent and confirm it was installed in the correct scope.
 
 ## Usage
 
