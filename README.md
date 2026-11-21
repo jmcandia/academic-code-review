@@ -37,34 +37,53 @@ The CLI prompts you to choose the agent(s) to configure. To select an agent expl
 
 ## Usage
 
-For each evaluation, provide the assignment instructions, a YAML rubric, the student submission (Git repository, ZIP archive or source files) and the grading configuration (scale, conversion points, passing threshold and rounding). Start a conversation with the agent where the skill is installed and ask it to use `academic-code-review`.
+Prepare a YAML rubric with the assignment, grading configuration, performance levels and criteria. Start a conversation with the agent where the skill is installed and ask it to use `academic-code-review`. The rubric template also has singular `student` and `submission` fields: fill them for a single evaluation, or leave them empty and provide a student-to-submission mapping for a batch. Do not put a list of students inside the rubric; each generated evaluation result represents one student and one submission.
 
-### Evaluate one submission
+### Configure and evaluate one student
 
-Attach the assignment, rubric and one submission, then use a prompt such as:
+Copy `templates/rubric-template.yaml` to `rubric.yaml`, complete its assignment, grading and criteria sections, then set the student and submission fields for this evaluation:
 
-```text
-Use academic-code-review to evaluate this submission against the attached assignment and rubric. Apply the attached grading configuration. Generate an evaluation-report.md and evaluation-result.yaml. Include evidence with file paths and line references where available, and report any technical limitations. Do not execute the submission unless an approved isolated environment is available.
+```yaml
+student:
+  id: "2026001"
+  name: "Ana Pérez"
+
+submission:
+  type: zip
+  location: "submissions/2026001.zip"
+  submitted_at: null
+  commit: null
 ```
 
-### Evaluate multiple submissions with one rubric
+Provide that rubric, the assignment materials and the ZIP, repository or source files to the agent. For example:
 
-Provide the assignment, rubric and grading configuration once, and organize submissions into clearly identified folders, for example:
+```text
+Use academic-code-review to evaluate the submission at submissions/2026001.zip using the attached assignment and rubric.yaml. Generate evaluation-report.md and evaluation-result.yaml for student 2026001, Ana Pérez. Include evidence with file paths and line references where available, and report technical limitations. Do not execute the submission unless an approved isolated environment is available.
+```
+
+### Configure and evaluate a batch
+
+Use one common `rubric.yaml` with the assignment, grading configuration, performance levels and criteria filled in. Leave its singular `student` and `submission` fields empty. Organize the files with identifiable student IDs, for example:
 
 ```text
 submissions/
-  student-001/
-  student-002/
-  student-003/
+  2026001-Ana-Perez.zip
+  2026002-Bruno-Soto.zip
+  2026003-Camila-Ruiz.zip
 ```
 
-Then ask for a batch evaluation:
+Provide the rubric, assignment materials and all submissions, and give the agent an explicit mapping:
 
 ```text
-Use academic-code-review to evaluate every submission in the attached submissions folder against the same assignment, rubric and grading configuration. Validate the rubric once, then assess each submission independently. Generate evaluation-report.md and evaluation-result.yaml for each student, plus a course summary with each student identifier, percentage, grade, passing status and limitations. Do not use one student's code as evidence for another student's evaluation. Do not execute submissions unless an approved isolated environment is available.
+Use academic-code-review to evaluate this batch with the attached assignment and rubric.yaml. Validate the rubric once, then evaluate each submission independently using this mapping:
+- 2026001, Ana Pérez: submissions/2026001-Ana-Perez.zip
+- 2026002, Bruno Soto: submissions/2026002-Bruno-Soto.zip
+- 2026003, Camila Ruiz: submissions/2026003-Camila-Ruiz.zip
+
+Generate a separate evaluation-report.md and evaluation-result.yaml for each student. Record that student's ID, name and submission path in the corresponding result. Also generate a course summary with each student's percentage, grade, passing status and limitations. Do not use one student's code as evidence for another. Do not execute submissions unless an approved isolated environment is available.
 ```
 
-Keep each student's evidence and reports separate. If no approved isolated environment is available, the skill performs static inspection and reports execution as unverified. The full workflow, including batch handling, is in `references/evaluation-workflow.md`.
+The mapping can be supplied in the prompt or a separate roster file; it is not a list inside the rubric schema. Alternatively, make a copy of the common rubric for each student and change only its `student` and `submission` fields. Keep each student's evidence and reports separate. If no approved isolated environment is available, the skill performs static inspection and reports execution as unverified. The full workflow, including batch handling, is in `references/evaluation-workflow.md`.
 
 ### Review and approve an evaluation
 
