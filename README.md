@@ -101,6 +101,7 @@ A rubric defines weighted criteria, and each criterion contains weighted indicat
 
 - Criterion weights must sum to 100.
 - Indicator weights within each criterion must sum to 100.
+- Rubrics may define any number of discrete performance levels. A criterion may use `allowed_performance_levels` to exclude levels that do not apply to that question; if omitted, all shared levels are available.
 - The grading scale is configurable. Grade conversion uses piecewise linear interpolation between conversion points.
 - The passing threshold (`grading.passing.minimum_percentage`) is compared against the unrounded final percentage.
 - `missing_evidence_policy` is `proportional` (renormalize over verifiable indicators and report the unverified weight) or `none` (unverified indicators score zero).

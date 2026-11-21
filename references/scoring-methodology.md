@@ -43,6 +43,11 @@ descriptor best matches the evidence and award its configured percentage
 of the indicator maximum. Do not create intermediate levels unless the
 rubric authorizes them. Record the selected level and descriptor.
 
+If the criterion defines `allowed_performance_levels`, restrict selection
+to those IDs. Do not select a globally defined level that the criterion
+excludes. If the field is absent, use all levels in `performance_levels`.
+Never infer an omitted level from the gap between two available scores.
+
 ### 3.1 Evidence-based scoring
 
 For each indicator, record:

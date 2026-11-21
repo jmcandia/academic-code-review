@@ -102,6 +102,11 @@ criteria:
       excellent: "Criterion-specific descriptor for full achievement."
       good: "Criterion-specific descriptor for minor omissions."
 
+    # Optional. Restrict this criterion to a subset of the shared levels.
+    # If omitted, all top-level performance_levels are available.
+    # Excluded levels must not be used when scoring this criterion.
+    # allowed_performance_levels: [excellent, good, not_achieved]
+
     evidence_required: true
 
   - id: "C02"

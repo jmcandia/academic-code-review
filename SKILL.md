@@ -117,6 +117,7 @@ Verify:
 - Criterion identifiers.
 - Criterion weights.
 - Indicator weights.
+- Performance levels and any per-criterion allowed-level subsets.
 - Maximum scores.
 - Grading scale.
 - Conversion rules.
@@ -126,6 +127,11 @@ Verify:
 Criterion weights must sum to 100%.
 
 Indicator weights within each criterion must sum to 100%.
+
+When a rubric defines `allowed_performance_levels` for a criterion, score
+that criterion only with the listed global level IDs. If the field is
+absent, all globally defined performance levels are available. Never add
+an excluded level or interpolate an unlisted score.
 
 Never silently modify an invalid rubric.
 

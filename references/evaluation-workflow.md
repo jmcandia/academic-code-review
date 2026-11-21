@@ -72,6 +72,8 @@ Check:
 - Criterion identifiers.
 - Criterion weights.
 - Indicator weights.
+- Shared performance-level identifiers and percentages.
+- Per-criterion `allowed_performance_levels` subsets, when provided.
 - Score ranges.
 - Grading scale.
 - Grade conversion.
@@ -244,6 +246,8 @@ For each criterion:
 6. Assign indicator scores.
    When the rubric uses discrete performance levels, record the selected
    level identifier and descriptor and award exactly its configured value.
+   Respect each criterion's `allowed_performance_levels` subset; when it is
+   absent, all globally defined levels are available for that criterion.
 7. Aggregate criterion scores.
 8. Calculate weighted contribution.
 9. Document justification.

@@ -69,10 +69,10 @@ The maximum score must be greater than zero.
 
 ### 4.2.1 Discrete performance levels
 
-Rubrics may define a shared set of discrete performance levels when each
-criterion uses the same descriptive scale. Store the exact awarded score
-for each level; do not interpolate between levels unless the rubric
-explicitly allows it.
+Rubrics may define a shared set of discrete performance levels. Store the
+exact awarded score for each level; do not interpolate between levels
+unless the rubric explicitly allows it. A rubric may contain any number
+of levels; do not assume a fixed five-level scale.
 
 ```yaml
 performance_levels:
@@ -87,12 +87,45 @@ performance_levels:
 ```
 
 When present, each criterion may provide a descriptor override for any
-level. The score for a criterion is the selected level percentage times
-its maximum score. The final percentage remains the weighted sum of the
-criterion ratios. Validate that level identifiers are unique and level
-percentages are between 0 and 100. Preserve the rubric's order and labels.
-Criterion-specific overrides use `performance_level_overrides`, keyed by
-the shared level identifier.
+level. A criterion may also restrict which shared levels are available by
+setting `allowed_performance_levels`. If omitted, every level in the shared
+`performance_levels` list is available for that criterion. If present, the
+evaluator must select only from that subset; it must not award an omitted
+level or invent an intermediate score. For example:
+
+```yaml
+criteria:
+  - id: "Q01"
+    name: "Question 1"
+    description: "Evaluate question 1."
+    weight: 50
+    max_score: 10
+    allowed_performance_levels: [excellent, emerging, not_achieved]
+    indicators:
+      - id: "I01"
+        description: "Question 1 performance."
+        weight: 100
+
+  - id: "Q02"
+    name: "Question 2"
+    description: "Evaluate question 2."
+    weight: 50
+    max_score: 10
+    allowed_performance_levels: [excellent, acceptable, not_achieved]
+    indicators:
+      - id: "I02"
+        description: "Question 2 performance."
+        weight: 100
+```
+
+The score for a criterion is the selected level percentage times its
+maximum score. The final percentage remains the weighted sum of the
+criterion ratios. Validate that global level identifiers are unique and
+percentages are between 0 and 100. A criterion's allowed list must be
+non-empty, contain unique IDs defined in `performance_levels`, and preserve
+their source order. Criterion-specific descriptor overrides use
+`performance_level_overrides`, keyed only by levels available to that
+criterion.
 
 ### 4.3 Grading scale
 
@@ -321,6 +354,9 @@ Before evaluation:
 9. Validate submission type.
 10. When discrete performance levels are present, validate unique level IDs,
     percentages within 0–100, and every criterion override references a defined level.
+11. When `allowed_performance_levels` is present, validate it is a non-empty
+    list of unique IDs from the global levels; reject overrides for levels
+    excluded from that criterion. If omitted, all global levels apply.
 
 An invalid rubric must not be silently corrected.
 
